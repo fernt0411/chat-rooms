@@ -14,6 +14,7 @@ var user = {
 socket.on('connect', function() {
     socket.emit('connectChat', user, function(res) {
         console.log('users', res);
+        renderUsers(res);
     });
 
 });
@@ -22,18 +23,20 @@ socket.on('connect', function() {
 socket.on('sendMessageFromAdmin', function(message) {
 
     console.log(message);
-
+    renderMessages(message, false);
+    scrollBottom();
 });
 
 socket.on('allUsers', function(users) {
-
-    console.log(users);
+    renderUsers(users);
+    //  console.log(users);
 
 });
 
 socket.on('sendMessage', function(message) {
-
-    console.log(message);
+    renderMessages(message, false);
+    scrollBottom();
+    // console.log(message);
 
 });
 
